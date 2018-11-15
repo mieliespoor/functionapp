@@ -1,15 +1,14 @@
-using System;
 using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Host;
+using Microsoft.Extensions.Logging;
 
 namespace FunctionApp
 {
     public static class Function1
     {
         [FunctionName("Function1")]
-        public static void Run([QueueTrigger("queueitem", Connection = "AzureWebJobsDashboard")]string myQueueItem, TraceWriter log)
+        public static void Run([QueueTrigger("queueitem", Connection = "AzureWebJobsDashboard")]string myQueueItem, ILogger logger)
         {
-            log.Info($"C# Queue trigger function processed: {myQueueItem}");
+            logger.LogInformation($"C# Queue trigger function processed: {myQueueItem}");
         }
     }
 }
